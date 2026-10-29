@@ -1,0 +1,41 @@
+# *****************************************************************************
+# Copyright (c) 2026 Calypso Networks Association https://calypsonet.org/     *
+#                                                                             *
+# Access, distribution and usage restricted to effective members of the      *
+# Calypso Networks Association.                                              *
+#                                                                             *
+# This program and the accompanying materials are made available under the   *
+# terms of the CNAML - (Calypso Networks Association Member License).        *
+#                                                                             *
+# SPDX-License-Identifier: LicenseRef-CNAML                                   *
+# *****************************************************************************/
+
+# FetchContent added in CMake 3.11, downloads during the configure step
+# FetchContent_MakeAvailable was added in CMake 3.14; simpler usage
+INCLUDE(FetchContent)
+
+IF(NOT EXISTS "${CMAKE_BINARY_DIR}/_deps/keypopcalypsocardcppapi-src")
+
+    MESSAGE("-- > Fetching keypop calypso card from storagecard-pcsc example")
+
+    FetchContent_Declare(
+
+        KeypopCalypsoCardCppApi
+
+        DOWNLOAD_EXTRACT_TIMESTAMP true
+        GIT_REPOSITORY https://github.com/eclipse-keypop/keypop-calypso-card-cpp-api
+        GIT_TAG 2.2.0
+    )
+
+ELSE()
+
+    FetchContent_Declare(
+
+        KeypopCalypsoCardCppApi
+
+        SOURCE_DIR ${CMAKE_BINARY_DIR}/_deps/keypopcalypsocardcppapi-src
+    )
+
+ENDIF()
+
+FetchContent_MakeAvailable(KeypopCalypsoCardCppApi)
